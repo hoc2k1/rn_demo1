@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, FlatList, SafeAreaView, StatusBar, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/Product/ProductCard';
 import { COLORS } from '../../constants/theme';
 import { UI_COMPONENTS } from '../../constants/uiComponents';
 import { Product } from '../../types';

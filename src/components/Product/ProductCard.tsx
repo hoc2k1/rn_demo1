@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { Product } from '../types';
-import { COLORS, SIZES, FONTS } from '../constants/theme';
+import { Product } from '../../types';
+import { COLORS, SIZES, FONTS } from '../../constants/theme';
 
-import { uiRegistry } from '../utils/uiRegistry';
-import { UI_COMPONENTS } from '../constants/uiComponents';
+import { uiRegistry } from '../../utils/uiRegistry';
+import { UI_COMPONENTS } from '../../constants/uiComponents';
 
 interface ProductCardProps {
   product: Product;

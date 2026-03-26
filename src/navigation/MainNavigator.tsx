@@ -6,7 +6,9 @@ import HomeScreen from '../screens/Home';
 import ProductDetailScreen from '../screens/ProductDetail';
 import CartScreen from '../screens/Cart';
 import ProfileScreen from '../screens/Profile';
-import { Text } from 'react-native';
+import HomeLogo from "../../assets/icons/navigation/home.svg";
+import OrderLogo from "../../assets/icons/navigation/orders.svg";
+import ProfileLogo from "../../assets/icons/navigation/profile.svg";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -25,11 +27,9 @@ const MainNavigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          let iconName = '';
-          if (route.name === 'Home') iconName = '🏠';
-          else if (route.name === 'Cart') iconName = '🛒';
-          else if (route.name === 'Profile') iconName = '👤';
-          return <Text style={{ fontSize: size, color }}>{iconName}</Text>;
+          if (route.name === 'Home') return <HomeLogo width={size} height={size} color={color} />;
+          else if (route.name === 'Cart') return <OrderLogo width={size} height={size} color={color} />;
+          else if (route.name === 'Profile') return <ProfileLogo width={size} height={size} color={color} />;
         },
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.gray,
