@@ -1,36 +1,31 @@
 import { Product } from '../types';
-
-const BASE_URL = 'https://dummyjson.com';
+import { API_ENDPOINTS } from '../constants/api';
+import { apiClient } from '../utils/apiClient';
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/products`);
-    const data = await response.json();
+    const data = await apiClient.get<{ products: Product[] }>(API_ENDPOINTS.PRODUCTS.LIST, { cache: true });
     return data.products;
   } catch (error) {
-    console.error('Error fetching products:', error);
     return [];
   }
 };
 
 export const fetchProductById = async (id: number): Promise<Product | null> => {
   try {
-    const response = await fetch(`${BASE_URL}/products/${id}`);
-    const data = await response.json();
+    const data = await apiClient.get<Product>(API_ENDPOINTS.PRODUCTS.DETAIL(id), { cache: true });
     return data;
   } catch (error) {
-    console.error(`Error fetching product ${id}:`, error);
     return null;
   }
 };
 
 export const fetchProductsByCategory = async (category: string): Promise<Product[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/products/category/${category}`);
-    const data = await response.json();
+    const data = await apiClient.get<{ products: Product[] }>(API_ENDPOINTS.PRODUCTS.BY_CATEGORY(category), { cache: true });
     return data.products;
   } catch (error) {
-    console.error(`Error fetching products for category ${category}:`, error);
     return [];
   }
 };
+
