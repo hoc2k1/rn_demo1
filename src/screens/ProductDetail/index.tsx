@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, ScrollView, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, Image, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { COLORS, SIZES } from '../../constants/theme';
 import { UI_COMPONENTS } from '../../constants/uiComponents';
@@ -63,7 +63,7 @@ const ProductDetailScreen = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: product.thumbnail }} style={styles.image as any} resizeMode="contain" />
@@ -96,7 +96,7 @@ const ProductDetailScreen = () => {
       </ScrollView>
 
       <PageFooter onAddToCart={handleAddToCart} />
-    </SafeAreaView>
+    </View>
   );
 };
 

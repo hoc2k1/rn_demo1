@@ -12,6 +12,9 @@ export const COLORS = {
   gray: '#8E8E93',
   lightGray: '#D1D1D6',
   darkGray: '#3A3A3C',
+  tabBackground: '#E95322',
+  tabIcon: '#FFFFFF',
+  tabIconActive: '#E95322',
 };
 
 export const SIZES = {
@@ -24,6 +27,14 @@ export const SIZES = {
   radius: 12,
   padding: 20,
 };
+
+export const ROUNDED = {
+  full: 9999,
+  none: 0,
+  lg: 16,
+  md: 10,
+  sm: 6,
+}
 
 export const FONTS: { [key: string]: TextStyle } = {
   h1: { fontSize: 32, fontWeight: 'bold' },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { updateQuantity, removeFromCart, clearCart } from '../../store/slices/cartSlice';
 import { COLORS } from '../../constants/theme';
@@ -41,7 +41,7 @@ const CartScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Your Cart</Text>
         {cartItems.length > 0 && (
@@ -74,7 +74,7 @@ const CartScreen = () => {
           </View>
         </>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

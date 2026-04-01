@@ -8,7 +8,7 @@ import CustomHomeHeader from './CustomHomeHeader';
  */
 
 // Ghi đè HomeHeader mặc định bằng bản Custom
-uiRegistry.override(UI_COMPONENTS.HomeHeader, CustomHomeHeader);
+// uiRegistry.override(UI_COMPONENTS.HomeHeader, CustomHomeHeader);
 
 // Bạn có thể thêm các override khác ở đây
 // uiRegistry.override(UI_COMPONENTS.ProductCard, MyCustomProductCard);

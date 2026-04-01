@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList, SafeAreaView, StatusBar, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Text, View, FlatList, StatusBar, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ProductCard from '../../components/Product/ProductCard';
 import { COLORS } from '../../constants/theme';
@@ -7,6 +7,7 @@ import { UI_COMPONENTS } from '../../constants/uiComponents';
 import { Product } from '../../types';
 import { useProducts } from '../../hooks/useProducts';
 import { uiRegistry } from '../../utils/uiRegistry';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import styles from './styles';
 
 /**
@@ -23,7 +24,7 @@ const DefaultHomeHeader: React.FC = () => (
 // Đăng ký component mặc định
 uiRegistry.register(UI_COMPONENTS.HomeHeader, DefaultHomeHeader);
 
-const HomeScreen: React.FC = () => {
+const HomeScreen: React.FC = () => {  
   const navigation = useNavigation<any>();
   const { products, loading, error, refresh } = useProducts();
 
@@ -38,7 +39,7 @@ const HomeScreen: React.FC = () => {
 
   if (error && products.length === 0) {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <HomeHeader />
         <View style={styles.center}>
           <Text style={styles.errorText}>Oops! Something went wrong.</Text>
@@ -47,12 +48,12 @@ const HomeScreen: React.FC = () => {
             <Text style={styles.buttonText}>Try Again</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <HomeHeader />
       
@@ -63,8 +64,10 @@ const HomeScreen: React.FC = () => {
       ) : (
         <FlatList
           data={products}
-          renderItem={({ item }) => (
-            <ProductCardComponent product={item} onPress={handleProductPress} />
+          renderItem={({ item, index }) => (
+            <Animated.View entering={FadeInDown.delay(index * 50).springify()}>
+              <ProductCardComponent product={item} onPress={handleProductPress} />
+            </Animated.View>
           )}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.listContent}
@@ -80,7 +83,7 @@ const HomeScreen: React.FC = () => {
           }
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

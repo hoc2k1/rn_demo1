@@ -1,48 +1,61 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { COLORS } from '../constants/theme';
+import { COLORS, ROUNDED } from '../constants/theme';
 import HomeScreen from '../screens/Home';
-import ProductDetailScreen from '../screens/ProductDetail';
 import CartScreen from '../screens/Cart';
 import ProfileScreen from '../screens/Profile';
 import HomeLogo from "../../assets/icons/navigation/home.svg";
-import OrderLogo from "../../assets/icons/navigation/orders.svg";
+import MenuLogo from "../../assets/icons/navigation/menu.svg";
+import CartLogo from "../../assets/icons/navigation/cart.svg";
 import ProfileLogo from "../../assets/icons/navigation/profile.svg";
+import { TabItemsProps } from '../types';
+import { View } from 'react-native';
+import styles from './styles';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
-const HomeStack = () => {
+const TabItems: React.FC<TabItemsProps> = ({ color, size, routeName, focused }) => {
+  let icon = null;
+
+  switch (routeName) {
+    case 'Home':
+      icon = <HomeLogo width={size} height={size} color={color} />;
+      break;
+    case 'Menu':
+      icon = <MenuLogo width={size} height={size} color={color} />;
+      break;
+    case 'Cart':
+      icon = <CartLogo width={size} height={size} color={color} />;
+      break;
+    case 'Profile':
+      icon = <ProfileLogo width={size} height={size} color={color} />;
+      break;
+    default:
+      icon = null;
+  }
+
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="HomeMain" component={HomeScreen} />
-      <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
-    </Stack.Navigator>
-  );
-};
-
+    <View style={[styles.tabBarItem, {backgroundColor: focused ? COLORS.tabIcon : 'transparent'}]}>
+      {icon}
+    </View>
+  )
+}
 const MainNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          if (route.name === 'Home') return <HomeLogo width={size} height={size} color={color} />;
-          else if (route.name === 'Cart') return <OrderLogo width={size} height={size} color={color} />;
-          else if (route.name === 'Profile') return <ProfileLogo width={size} height={size} color={color} />;
+        tabBarIcon: ({ color, size, focused }) => {
+          return <TabItems color={color} size={size} routeName={route.name} focused={focused} />
         },
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.gray,
+        tabBarActiveTintColor: COLORS.tabIconActive,
+        tabBarInactiveTintColor: COLORS.tabIcon,
+        tabBarShowLabel: false,
         headerShown: false,
-        tabBarStyle: {
-          borderTopWidth: 0,
-          elevation: 0,
-          height: 60,
-          paddingBottom: 10,
-        },
+        tabBarStyle: styles.tabBar,
       })}
     >
-      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      {/* <Tab.Screen name="Menu" component={MenuStack} /> */}
       <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

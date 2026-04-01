@@ -1,3 +1,6 @@
+import { ColorValue } from "react-native";
+import { NumberProp } from "react-native-svg";
+
 export interface Product {
   id: number;
   title: string;
@@ -13,4 +16,11 @@ export interface Product {
 
 export interface CartItem extends Product {
   quantity: number;
+}
+
+export interface TabItemsProps {
+  color: ColorValue;
+  size: NumberProp;
+  routeName: String;
+  focused: Boolean;
 }
