@@ -24,3 +24,12 @@ export interface TabItemsProps {
   routeName: String;
   focused: Boolean;
 }
+
+export interface TabItemProps {
+  route: any;
+  isFocused: boolean;
+  onPress: () => void;
+  onLongPress: () => void;
+  options: any;
+  state: any;
+}
